@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   serverConfig: {
-    apiUrl: 'https://api.spacexdata.com/'
-  }
+    apiUrl: 'https://api.spacexdata.com/',
+  },
 };
 
 /*

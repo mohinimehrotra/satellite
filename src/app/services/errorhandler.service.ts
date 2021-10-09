@@ -1,12 +1,20 @@
 import { throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class ErrorHandler {
-  constructor(
-    ) {}
+  constructor() {}
 
-  handleError(error: { hasOwnProperty: (arg0: string) => any; error: { hasOwnProperty: (arg0: string) => any; error: string | any[]; message: any; }; status: any; message: any; }) {
+  handleError(error: {
+    hasOwnProperty: (arg0: string) => any;
+    error: {
+      hasOwnProperty: (arg0: string) => any;
+      error: string | any[];
+      message: any;
+    };
+    status: any;
+    message: any;
+  }) {
     let errorMessage = '';
     if (error.hasOwnProperty('error')) {
       // client-side error
@@ -26,5 +34,4 @@ export class ErrorHandler {
     console.error(new Date() + '- ', errorMessage);
     return throwError(errorMessage);
   }
-
 }
