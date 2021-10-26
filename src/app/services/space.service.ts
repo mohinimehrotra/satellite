@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { ErrorHandler, Injectable } from '@angular/core';
+import { ErrorHandler, EventEmitter, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { FETCH_SPACEX_DATA } from '../constants/apis.constant';
 import { catchError, map } from 'rxjs/operators';
@@ -8,23 +8,30 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class SpaceService {
-  constructor(
+
+  yearEmitter: EventEmitter<number> = new EventEmitter();
+  launchSuccessEmitter: EventEmitter<boolean> = new EventEmitter();
+  landSuccessEmitter: EventEmitter<boolean> = new EventEmitter();
+
+
+   constructor(
     private httpClient: HttpClient,
     private errorHandler: ErrorHandler
   ) {}
 
   fetchSpaceXData(
-    launchYear: number,
+     launchYear: number,
     successfulLaunch: boolean,
-    successfulLand: boolean
+     successfulLand: boolean
   ) {
     // Initialize Params Object
     let params = new HttpParams();
 
     // Begin assigning parameters
-    params = params.append('launch_year', launchYear);
-    params = params.append('launch_success', successfulLaunch);
-    params = params.append('land_success', successfulLand);
+
+      params = params.append('launch_year', launchYear);
+      params = params.append('launch_success', successfulLaunch);
+      params = params.append('land_success', successfulLand);
 
     return this.httpClient.get(
       `${environment.serverConfig.apiUrl}${FETCH_SPACEX_DATA}`,
@@ -32,6 +39,15 @@ export class SpaceService {
     );
     // .pipe(catchError(this.errorHandler.handleError));
   }
+  getYearEmitter() : EventEmitter<number>{
+    return this.yearEmitter;
+  }
+  getLaunchSuccessEmitter() : EventEmitter<boolean>{
+     return this.launchSuccessEmitter;
+  }
+  getLandSuccessEmitter() : EventEmitter<boolean>{
+    return this.landSuccessEmitter;
+ }
 }
 // generalErrorHandler(error: any, caught: Observable<any>): Observable<any> {
 //   console.log('error caught: ', error);

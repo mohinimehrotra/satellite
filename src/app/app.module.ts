@@ -6,12 +6,13 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
 import {  HttpClientModule } from '@angular/common/http';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-
+    SidebarComponent
 
   ],
   imports: [

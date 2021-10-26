@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { SpaceService } from '../services/space.service';
 // import { SpaceshipDetailModalPage } from '../modules/spaceship-detail-modal.page';
 
@@ -8,16 +9,32 @@ import { SpaceService } from '../services/space.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  customErrorMessage = '';
+  customErrorMessage = 'Error';
   // items: SpaceshipDetailModalPage [] = [];
   items: any = [];
-  launchYear: number = 2006;
+  launchYear: number = 2018;
   successfulLaunch: boolean = true;
   successfulLand: boolean = true;
+  yearSubcription: Subscription = new Subscription;
+  landSuccessSubcription: Subscription = new Subscription;
+  launchSuccessSubcription: Subscription = new Subscription;
 
   constructor(private spaceService: SpaceService) {}
 
   ngOnInit(): void {
+
+    this.yearSubcription = this.spaceService.getYearEmitter().subscribe((year : number) => {
+      this.launchYear = year;
+      this.data();
+    });
+    this.launchSuccessSubcription = this.spaceService.getLaunchSuccessEmitter().subscribe((launch_success : boolean) => {
+        this.successfulLaunch = launch_success;
+        this.data();
+      });
+    this.landSuccessSubcription = this.spaceService.getLandSuccessEmitter().subscribe((land_success : boolean) => {
+        this.successfulLand = land_success;
+        this.data();
+    });
     this.data();
   }
 
@@ -26,7 +43,7 @@ export class HomeComponent implements OnInit {
       .fetchSpaceXData(
         this.launchYear,
         this.successfulLaunch,
-        this.successfulLand
+       this.successfulLand,
       )
       .subscribe((responseData) => {
         console.log(responseData);

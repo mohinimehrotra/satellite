@@ -1,4 +1,23 @@
-<tr *ngFor="let item of items">
+<div class="row">
+    <div class="col-md-3" *ngFor="let item of items">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top bg" src={{item.links.mission_patch_small}} alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{item.rocket.second_stage.payloads[0].payload_id}}</h5>
+                <p class="card-text"><b>Mission Ids:</b></p>
+                <div>{{item.mission_id}} </div>
+
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Launch Year:</b>{{item.launch_year}}</li>
+                <li class="list-group-item"><b>Successful Launch:</b>{{item.rocket.first_stage.cores[0].land_success}}</li>
+                <li class="list-group-item"><b>Successful Landing:</b>{{item.launch_success}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- style="border: 1px solid black -->
+    <!-- <tr *ngFor="let item of items">
     <td>
         <span>{{ item.mission_name }}#{{ item.flight_number }}</span>
     </td>
@@ -18,4 +37,4 @@
     <td>
         <span>Successful landing{{ item.launch_landing }}</span>
     </td>
-</tr>
+</tr> -->

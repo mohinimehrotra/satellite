@@ -1,0 +1,29 @@
+<h1>Filters</h1>
+<div class="row">
+    <h5 style="text-align: center;">
+        <u>Launch Year</u>
+    </h5>
+    <div *ngFor="let year of years" class="col-md-6">
+        <button (click)="changeYear(year)" class="btn btn-success">{{year}}</button>
+    </div>
+</div>
+<div>
+    <h5 style="text-align: center;"><u>Successful Launch</u></h5>
+    <div class="col-md-6">
+        <button (click)=" changeLaunchSuccess(true)" class="btn btn-success">True</button>
+    </div>
+    <div class="col-md-6">
+        <button (click)="changeLaunchSuccess(false)" class="btn btn-success">False</button>
+    </div>
+</div>
+<div>
+    <h5 style="text-align: center;">
+        <u>Successful Land
+    </u></h5>
+    <div class="col-md-6">
+        <button (click)="changeLandSuccess(true)" class="btn btn-success">True</button>
+    </div>
+    <div class="col-md-6">
+        <button (click)="changeLandSuccess(false)" class="btn btn-success">False</button>
+    </div>
+</div>
